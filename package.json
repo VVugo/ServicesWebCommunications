@@ -1,0 +1,28 @@
+{
+    "name": "services_web_communication",
+    "version": "1.0.0",
+    "description": "Réalisation d'une application client-serveur de recherche client sous PHP en PDO en ayant une architecture SOAP ou REST.",
+    "main": "index.js",
+    "dependencies": {
+        "prettier": "^2.2.1"
+    },
+    "devDependencies": {},
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "vendor/bin/phpcs src/ && vendor/bin/phpcbf src/ && vendor/bin/phpstan src/ && vendor/bin/phpmd src/ text cleancode"
+        }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/VVugo/ServicesWebCommunications.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/VVugo/ServicesWebCommunications/issues"
+    },
+    "homepage": "https://github.com/VVugo/ServicesWebCommunications#readme"
+}
