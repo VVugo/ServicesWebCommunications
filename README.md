@@ -106,7 +106,7 @@ Dans package.json il est important d'ajouter les lignes suivantes afin de pouvoi
 ```
    "husky": {
         "hooks": {
-            "pre-commit": "vendor/bin/phpcs src/ && vendor/bin/phpcbf src/ && vendor/bin/phpstan src/ && vendor/bin/phpmd src/ text cleancode"
+            "pre-commit": "vendor/bin/phpcs src/ && vendor/bin/phpcbf src/ && vendor/bin/phpstan analyse src/ && vendor/bin/phpmd src/ text cleancode"
         }
     },
 
