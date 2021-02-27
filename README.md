@@ -1,116 +1,72 @@
-# Services web communication
+# Service API Communication WEB
 
-- Réalisation d'une application client-serveur de recherche client sous **PHP** en PDO en ayant une architecture SOAP ou REST.
-- Base de donnée sous **MySqlServer**.
----
+## BREST ADRIEN
 
-## Utilisation de Composer
+## Objectif :
 
-L'utilisation de composer dans ce projet permet d'utiliser des dépendances dans notre projet, on utilisera les dépendances suivantes.
+Réaliser une application web service qui utilise un API soit de type REST ou SOAP,
 
-##### .env :
+L'application permettra d'afficher une liste de clients, et une barre de recherche devra être disponible pour chercher un client sur tous les champs. (ref client,nom, prenom ...)
 
-- Défini un fichier de variables d'environnements dans lequelles on enregistrera les accès à notre base de donnée.
+ Je voulais tout d’abord développer sous Php Native, mais j’ai remarque que ce n’était pas le choix le plus facile, car il pouvait y avir des problèmes de sécurité. De plus les Framework dont j’ai choisi mon permis de les découvrir, et de me simplifier la tache.
 
-##### PhpStan :
-- Outil d'analyse statique, il détecte les problèmes de structure dans le code.
+# Utilisation de Symfony :
+J’ai choisi le framework Symfony, afin de faire une application web sous PHP, en utilisant la méthode d’API REST afin d’utiliser des méthodes HTTP pour récupérer les informations des Clients.
+C’est également un choix personnel, je suis habitué à développer sous le PHP, mais je n’avais jamais de Symfony, c’était un bon moyen d’apprendre un nouveau FrameWork.
 
-##### PHPMD / PHPCS :
-- Dépendance permettant de détecter les sources possibles de bugs provenant de méthodes / expressions trop complexes.
-- Garantit le respect des conventions de développement PSR.
+# Utilisation de Api PlatForm :
+Le FrameWork Symfony n’est pas très reconnue pour faire des applications avec des API, c’est pour cela que du côté API j’ai utilise API PlatForm. Il permet de créer et de personnaliser facilement des API en quelques minutes, dans notre cas nous avons juste besoin de lire des informations depuis l’API. Une fois de plus c’est un Framework qui m’était inconnue.
 
-##### Prettier :
-- Formate le code de façon automatique afin de corriger une partie des problèmes remontés par PHPCS.
+# Fonctionnement du projet :
 
-##### Bootstrap :
-- La mise en forme de notre application web
+Dans le dossier du projet, lancer la commande qui permet d'installer composer ainsi que toutes les
+dépendances.
 
----
-## Installation Composer
-Intaller composer dans le répertoire actuel, executé les lignes de commandes suivantes dans votre terminal afin d'installer automatiquement Composer ou suivez le guide d'[installation](https://getcomposer.org/download/).
+**composer install**
 
-**Installation** :
-```php
-php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('sha384', 'composer-setup.php') === '756890a4488ce9024fc62c56153228907f1545c228516cbf63f885e036d37e9a59d27d63f46af1d4d07ee0f76181c7d3') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-php composer-setup.php
-php -r "unlink('composer-setup.php');"
-```
+Une fois l'installation de composer, lancer un serveur sous Xampp ou autre et modifier le **.env** et indiquer
+les liens / identifiants de connexion à la base de données.
 
-**Initialisation** :
+Lancer la commande suivante qui permet de synchroniser la base de données locale avec les informations
+pré-enregistrées :
 
-```php
-php composer init
-```
-----
+**php bin/console doctrine:migrations:migrate**
 
-## Installation des dépendances via composer
----
-**Installation | .ENV** :
-```php
-php composer require symfony/dotenv
-```
-**Utilisation | .ENV** :
-```php
-use SymfonyComponentDotenvDotenv;
+Importation des données dans la base de données (cette operation peut durer plusieurs minutes):
 
-$dotenv = new Dotenv();
-$dotenv->load(__DIR__.'/.env');
+## Php bin/console import:csv
 
-// you can also load several files
-$dotenv->load(__DIR__.'/.env', __DIR__.'/.env.dev');
+L’application peut être lancée :
 
-// overwrites existing env variables
-$dotenv->overload(__DIR__.'/.env');
+**symphony serve**
 
-// loads .env, .env.local, and .env.$APP_ENV.local or .env.$APP_ENV
-$dotenv->loadEnv(__DIR__.'/.env');
-```
----
-**Installation | PHPSTAN** :
-```php
-php composer require --dev phpstan/phpstan
-```
----
-**Installation | PHPMD** :
-```php
-php composer require phpmd/phpmd
-```
----
-**Installation | PHPCS** :
-```php
-php composer require squizlabs/php_codesniffer
-```
----
-**Installation | PRETTIER** :
-```npm
-npm install --save-dev prettier @plugin-php
-```
----
-**Installation GIT | NPM** :
-```php
-git init
-git remote add origin https://github.com/VVugo/ServicesWebCommunications.git
+La page est accessible sur **[http://127.0.0.1:8000/](http://127.0.0.1:8000/)**
 
-npm init
-```
----
-## Installation de Husky
-On utilise Husky dans ce projet afin de créer un hooks (un script qui s'éxécutera avant un commit dans notre projet).
-```
-npm insall husky --save-dev
-```
 
-**Modification de notre fichier package.json :**
-Dans package.json il est important d'ajouter les lignes suivantes afin de pouvoir utiliser nos dépendances automatiquement a lancement d'un pre-commit 
-```
-   "husky": {
-        "hooks": {
-            "pre-commit": "vendor/bin/phpcs src/ && vendor/bin/phpcbf src/ && vendor/bin/phpstan analyse src/ && vendor/bin/phpmd src/ text cleancode"
-        }
-    },
+# Feuille de route :
 
-```
+Utilisation de Api platform
 
-## Edited By
-**Auteur :**
+Création du project Symfony
+
+**composer create-project symfony/skeleton service-web**
+
+Installation de APi Platform
+
+**Composer require api**
+
+Création de l’entité Client
+
+**Php bin/console make:Entity**
+
+ Création de la base de donnée :
+
+**Php bin/console doctrine:database:create**
+
+** Php bin/console doctrine:schema:create**
+
+Installation de makerbundle:
+
+**Composer require symphony/maker-bundle**
+
+
